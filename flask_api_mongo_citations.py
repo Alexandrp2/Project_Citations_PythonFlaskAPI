@@ -3,9 +3,7 @@ from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson import ObjectId
 '''
-from flask_pymongo import PyMongo
-from bson.json_util import dumps
-from flask import Flask, Response,json,request
+Pour la gestion du CORS
 
 pip install -U flask-cors
 
@@ -15,7 +13,8 @@ CORS(app)
 '''
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = "mongodb://localhost:27017/citations-app"
+# app.config['MONGO_URI'] = "mongodb://localhost:27017/citations-app"
+app.config['MONGO_URI'] = "mongodb+srv://citationDbUser:citationDbPassword@cluster0.ooo2r.mongodb.net/citations-app?retryWrites=true&w=majority"
 
 mongo = PyMongo(app)
 
