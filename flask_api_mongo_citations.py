@@ -107,6 +107,17 @@ def MesCitationFavByIPoster():
                     mimetype='application/json')
 
 
+@app.route('/citation/post/mesCitations', methods=['POST'])
+def MesCitationPostByIPoster():
+    requestBoby = request.get_json()
+    poster = requestBoby.get('Poster')
+    citation = mongo.db.citations.find({'citationPoster':poster})
+    response = dumps(citation)
+    return Response(response,
+                    status=200,
+                    mimetype='application/json')
+
+
 @app.route('/citation/delete/macitation', methods=['DELETE'])
 def deleteCitationByIdAndPoster():
     requestBoby = request.get_json()
@@ -138,7 +149,33 @@ def deleteCitationByIdAndPosterToFav():
     citationId = ObjectId(requestBoby.get('citationId'))
     poster = requestBoby.get('Poster')
     citation = mongo.db.citations.update(
-   { '_id': citationId},  {'$inc':  {   "savedInFavorites": -1,  }, '$pull':  {'likers' :{'name':poster,'login':poster }, } })
+   { '_id': citationId},  {'$inc':  {   "savedInFavorites": -1,  }, '$pull':  {'likers' :{'login':poster }, } })
+    response = dumps(citation)
+    return Response(response,
+                    status=200,
+                    mimetype='application/json')
+
+
+@app.route('/citation/ajouter', methods=['POST'])
+def createNewCitation():
+    requestBoby = request.get_json()
+    
+    author = requestBoby.get('author')
+    year = requestBoby.get('year')
+    nationality = requestBoby.get('nationality')
+    citation = requestBoby.get('citation')
+    poster = requestBoby.get('Poster')
+    
+    citation = mongo.db.citations.insert({
+        "author": author,
+        "citation": citation,
+        "year": year,
+        "nationality": nationality,
+        "savedInFavorites": 0,
+        "citationPoster" : poster,
+        "likers":[]
+    })
+
     response = dumps(citation)
     return Response(response,
                     status=200,
@@ -160,23 +197,39 @@ def statCitations(stat):
     if stat == 'top3citation':
         citation = mongo.db.citations.find({}, { 'savedInFavorites': 1, 'citation': 1 }).sort([( 'savedInFavorites', -1 )]).limit(3)
 
+
     elif stat =='bestlogin':
         citation = mongo.db.citations.aggregate( [ { '$unwind': "$citationPoster" }, { '$sortByCount': "$citationPoster" },{ '$sort': {"count": -1 }}, { '$limit': 1 }   ])
 
+
     elif stat =='topquotedauthor':
-        citation = mongo.db.citations.aggregate( [ { '$unwind': "$author" }, { '$sortByCount': "$author" },{ '$sort': {"count": -1 }}, { '$limit': 1 }   ])
+        citation = mongo.db.citations.aggregate( [ 
+            { '$match': { '$and': [ { 'author': {'$ne': None } }, { 'author': {'$ne': "" } }, { 'author' : { '$exists': True } } ] } },
+            { '$sortByCount': "$author" },
+            { '$limit': 1 }   
+        ])
 
 
     elif stat =='favouriteauthor':
-        citation = mongo.db.citations.aggregate( [{ '$project':{   'author': 1, 'numberOfLikers': { '$size': "$likers" }  } },   
-        { '$match': { 'author': { '$ne': None } } }, 
-        { '$group' :   {   "_id" : "$author",  " nbLikers": {'$sum': "$numberOfLikers"}   }  },
-        { '$sort': {" nbLikers": -1 }},
-        { '$limit': 1 }  ] )
+        citation = mongo.db.citations.aggregate( [
+            { '$project':{   'author': 1, 'numberOfLikers': { '$size': "$likers" }  } },   
+            { '$match': { '$and': [ { 'author': {'$ne': None } }, { 'author': {'$ne': "" } }, { 'author' : { '$exists': True } } ] } },
+            { '$group' :   {   "_id" : "$author",  "nbLikers": {'$sum': "$numberOfLikers"}   }  },
+            { '$sort': {"nbLikers": -1 }},
+            { '$limit': 1 }  
+            ] 
+        )
+
 
     elif stat== 'anonymCitations':
-        citation = mongo.db.citations.aggregate([{ '$match': { 'author': {'$eq': None } } }, { '$group' :{  "_id" : "$author", " nbCitationSansAuteur": {'$sum': 1} } } ])
+        citation = mongo.db.citations.aggregate(
+            [
+                { '$match': { '$or': [ { 'author': {'$eq': None } }, { 'author': {'$eq': "" } }, { 'author' : { '$exists': False } } ] } }, 
+                { '$count' : "nbCitationSansAuteur" } 
+            ]
+        )
         
+   
     response = dumps(citation)
     return Response(response,
                     status=200,
