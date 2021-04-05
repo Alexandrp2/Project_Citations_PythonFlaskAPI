@@ -1,0 +1,170 @@
+/* Copy Paste all this part in your database to initialize its content with a dataset of 14 documents*/
+db.getCollection('citations').insert({
+    author: "Guillaume Apollinaire",
+    citation: "Passons, passons, puisque tout passe je me retournerai souvent.",
+    year: 1913,
+    nationality: "French",
+    savedInFavorites: 5,
+    citationPoster:"armand ",
+    likers:
+    [ 
+      {name:"Alexis Tuveu", login:"alexis"},
+     {name:"Alice Fois", login:"alice"},
+     {name:"Artur Bé", login:"artur"},
+     {name:"Amandine Lesoir", login:"amandine"},
+     {name:"Ambre Ton", login:"ambre"}
+    ]   
+})
+db.getCollection('citations').insert({
+    citation: "Quand on a un bon marteau, tous les problèmes ressemblent à des clous",
+    savedInFavorites: 1,
+    citationPoster:"alice",
+    likers:
+    [ 
+      {name:"Alice Fois", login:"alice"}
+    ]   
+})
+db.getCollection('citations').insert({
+    author: "Hoagie",
+    citation: "Great, I'm stuck in colonial times, tentacles are taking over the world, and now the toilet's backing up.",
+    year: 1993,
+    nationality: "English",
+    savedInFavorites: 0,
+    citationPoster:"armand",
+    likers:
+    [ 
+    ]   
+})
+db.getCollection('citations').insert({
+    author: "Nicolás Gómez Dávila",
+    citation: "La Révolution française paraît admirable à celui qui la connaît mal, terrible à celui qui la connaît mieux, grotesque à celui qui la connaît bien. ",
+    year: 1993,
+    nationality: "English",
+    savedInFavorites: 4,
+    citationPoster:"armand",
+    likers:
+    [ 
+      {name:"Alice Fois", login:"alice"},
+      {name:"Armand Bé", login:"armand"},
+      {name:"Alexis Tuveu", login:"alexis"},
+      {name:"Ambre Ton", login:"ambre"}
+    ]   
+})
+db.getCollection('citations').insert({
+    author: null,
+    citation: "Tomber est permis, se relever est ordonné",
+    year: null,
+    nationality: "Russian",
+    savedInFavorites: 1,
+    citationPoster:"alexis",
+    likers:
+    [ 
+      {name:"Armand Bé", login:"armand"}
+    ]   
+})
+db.getCollection('citations').insert({
+    author: "Marc Aurèle",
+    citation: "En te levant le matin, rappelle-toi combien précieux est le privilège de vivre, respirer, d'être heureux",
+    year: 169,
+    nationality: "Roman",
+    savedInFavorites: 0,
+    citationPoster:"alexis",
+    likers:
+    [ 
+
+    ]   
+})
+db.getCollection('citations').insert({
+    author: null,
+    citation: "Les gens heureux n'ont pas besoin de se presser",
+    year: null,
+    nationality: "Chinese",
+    savedInFavorites: 2,
+    citationPoster:"alice",
+    likers:
+    [ 
+       {name:"Alice Fois", login:"alice"},
+       {name:"Alexis Tuveu", login:"alexis"}
+    ]   
+})
+db.getCollection('citations').insert({
+    author: "Marc Aurèle",
+    citation: "L'homme ordinaire est exigeant avec les autres. L'homme exceptionnel est exigeant avec lui-même",
+    nationality: "Roman",
+    savedInFavorites: 0,
+    citationPoster:"alexis",
+    likers:[]   
+})
+db.getCollection('citations').insert({
+    author: "Marc Aurèle",
+    citation: "Tu peux, à l'heure que tu veux, te retirer en toi-même. Nulle retraite n'est plus tranquille ni moins troublée pour l'homme que celle qu'il trouve en son âme.",
+    profession : "Empereur, Homme d’Etat, Philosophe.",
+    year: 162,
+    nationality: "Roman",
+    savedInFavorites: 0,
+    citationPoster:"alexis",
+    likers : [ ]   
+})
+db.getCollection('citations').insert({
+    author: "Marc Aurèle",
+    citation: " Habitue-toi à être attentif à ce qu'un autre dit, et autant que possible entre dans l'âme de celui qui parle.",
+    profession : "Empereur, Homme d’Etat, Philosophe.",
+    year: "",
+    nationality: "Roman",
+    savedInFavorites: 0,
+    citationPoster:"alexis",
+    likers : [ ]   
+})
+db.getCollection('citations').insert({
+    author: "Gandhi",
+    citation: "Quand ce que vous pensez, ce que vous dites et ce que vous faites sont en harmonie, le bonheur vous appartient",
+    year: 1913,
+    nationality: "Indien",
+    savedInFavorites: 2,
+    citationPoster:"alexis",
+    likers:
+    [ 
+     {name:"Armand Bé", login:"armand"},
+     {name:"Alice Fois", login:"alice"},
+    ]   
+})
+db.getCollection('citations').insert({
+    author: "Gandhi",
+    citation: "Vis comme si tu devais mourir demain, apprends comme si tu devais vivre toujours",
+    year: 1930,
+    nationality: "Indien",
+    savedInFavorites: 2,
+    citationPoster:"alice",
+    likers:
+    [ 
+     {name:"Alexis Tuveu", login:"alexis"},
+     {name:"Amandine Lesoir", login:"amandine"},
+    ]   
+})
+db.getCollection('citations').insert({
+    author: "Gandhi",
+    citation: " La règle d'or de la conduite est la tolérance mutuelle, car nous ne penserons jamais tous de la même façon, nous ne verrons qu'une partie de la vérité et sous des angles différents",
+    profession : "Homme politique, Philosophe, Révolutionnaire (1869 - 1948)",
+    nationality: "Indien",
+    savedInFavorites: 2,
+    citationPoster:"alice",
+    likers:
+    [ 
+     {name:"Amandine Lesoir", login:"amandine"},
+     {name:"Ambre Ton", login:"ambre"}
+    ]   
+})
+db.getCollection('citations').insert({
+    citation: " La vie est un mystère qu'il faut vivre, et non un problème à résoudre.",
+    savedInFavorites: 6,
+    citationPoster:"alexis",
+    likers:
+    [ 
+     {name:"Alexis Tuveu", login:"alexis"},
+     {name:"Alice Fois", login:"alice"},
+     {name:"Armand Bé", login:"armand"},
+    {name:"Artur Bé", login:"artur"},
+   {name:"Amandine Lesoir", login:"amandine"},
+   {name:"Ambre Ton", login:"ambre"}
+    ]   
+})
