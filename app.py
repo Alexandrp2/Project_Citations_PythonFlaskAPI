@@ -12,12 +12,22 @@ pip install -U flask-cors
 
 app = Flask(__name__)
 
-# Autorise le CORS pour toute l'application (toutes les routes)
+# Allowing CORS for the whole application (all routes)
 CORS(app)
 
-# Configuration pour utilisation d'une base MongoDB locale ou distante (sur le cloud MongoDB Atlas)
-# app.config['MONGO_URI'] = "mongodb://localhost:27017/citations-app"
-app.config['MONGO_URI'] = "mongodb+srv://citationDbUser:citationDbPassword@cluster0.ooo2r.mongodb.net/citations-app?retryWrites=true&w=majority"
+
+'''
+    Local database config.
+    Comment of the following line if you use the distant MongoDB database (hosted in Mongo Atlas)
+'''
+app.config['MONGO_URI'] = "mongodb://localhost:27017/citations-app"
+
+'''
+    Distant database config.
+    Remove the comment of the following line if you use the distant Flask API (hosted in Azure)
+'''
+# app.config['MONGO_URI'] = "mongodb+srv://citationDbUser:citationDbPassword@cluster0.ooo2r.mongodb.net/citations-app?retryWrites=true&w=majority"
+
 
 mongo = PyMongo(app)
 
