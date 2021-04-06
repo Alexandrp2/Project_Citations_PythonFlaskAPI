@@ -22,7 +22,7 @@ The website is based on **HTML/CSS/Javascript**.
 
 Nothing is required: this app can be runned without nothing installed ! 
 How is it possible ? 
-* The MongoDB database, the same collection as we create below is stored in a the cloud (Mongo Atlas), 
+* The MongoDB database, the same collection as we create below is stored in the cloud (Mongo Atlas), 
 * The Flask server is hosted in Microsoft Azure cloud
 * The website has been developed to be used with no other action than launching the `index.html` file (no package, no dependencies to install)
 
@@ -63,32 +63,7 @@ set FLASK_APP=flask_api_mongo_citations.py
 flask run
 ```
 
-### Variant for the Flask API
-
-Step 1 (*Download the GitHub API repository*) and step 4 of the *Developer mode* can be skipped.
-In step 5 also skip the launch of API.
-
-Change to make : in `scriptIndex.js`, `scriptMonespace.js` and `scriptStatistiques.js` (located in the directory `js` of the website), 
-follow instructions in the beginning lines of these files:
-
-```Javascript
-/*
- * Comment of the following line if you use the distant Flask API (hosted in Azure)
- */
-const _URL = 'http://localhost:5000/';
-
-/*
- * Remove the comment of the following line if you use the distant Flask API (hosted in Azure)
- */
-// const _URL = 'https://apicitations.azurewebsites.net/';
-```
-Now, your Website calls the distant Flask API.
-
-Notice that it may have a **latency time of several seconds** before the server response, at least each time you first launch (*awake*) the website.
-Consider it as normal.
-
-
-### Variant for the MongoDB database
+### Variant for the MongoDB database (only)
 
 Step 2 and 3 of the *Developer mode* can be skipped because the database and collection created during these steps are hosted in the cloud. 
 In step 5 also skip *start MongoDB*.
@@ -113,6 +88,31 @@ app.config['MONGO_URI'] = "mongodb://localhost:27017/citations-app"
 ```
 
 Now, your Flask API request the distant database.
+
+### Variant for the Flask API + MongoDB Database (full remote mode)
+
+The steps 2 and 3 can be skipped (as mentionned above in *Variant for the MongoDB database (only)*).
+Besides, here, step 1 (*Download the GitHub API repository*) and step 4 of the *Developer mode* can also be skipped.
+In step 5 also skip the launch of API.
+
+Change to make : in `scriptIndex.js`, `scriptMonespace.js` and `scriptStatistiques.js` (located in the directory `js` of the website), 
+follow instructions in the beginning lines of these files:
+
+```Javascript
+/*
+ * Comment of the following line if you use the distant Flask API (hosted in Azure)
+ */
+const _URL = 'http://localhost:5000/';
+
+/*
+ * Remove the comment of the following line if you use the distant Flask API (hosted in Azure)
+ */
+// const _URL = 'https://apicitations.azurewebsites.net/';
+```
+Now, your Website calls the distant Flask API, which one is coded to request the distant database.
+
+Notice that it may have a **latency time of several seconds** before the server response, at least each time you first launch (*awake*) the website.
+Consider it as normal.
 
 
 ## Instructions of use
